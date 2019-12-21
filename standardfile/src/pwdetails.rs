@@ -71,46 +71,48 @@ pub fn new_pw_details(email: &String) -> PasswordDetails {
 
 impl HasPasswordDetails for PasswordDetails {
     fn get_pw_func(&self) -> String {
-        if self.pw_func.is_some() {
-            self.pw_func.clone().unwrap()
-        } else {
-            DEFAULT_PW_FUNC.to_string()
+        match self.pw_func {
+            Some(x) => x.clone(),
+            None => DEFAULT_PW_FUNC.to_string(),
         }
     }
+
     fn get_pw_alg(&self) -> String {
-        if self.pw_alg.is_some() {
-            self.pw_alg.clone().unwrap()
-        } else {
-           DEFAULT_PW_ALG.to_string()
+        match self.pw_alg {
+            Some(x) => x.clone(),
+            None => DEFAULT_PW_ALG.to_string(),
         }
     }
+
     fn get_pw_cost(&self) -> i32 {
         self.pw_cost.unwrap_or(DEFAULT_PW_COST)
     }
+
     fn get_pw_key_size(&self) -> i32 {
         self.pw_key_size.unwrap_or(DEFAULT_PW_KEY_SIZE)
     }
+
     fn get_pw_nonce(&self) -> String {
-        if self.pw_nonce.is_some() {
-            self.pw_nonce.clone().unwrap()
-        } else {
-            String::new()
+        match self.pw_nonce {
+            Some(x) => x.clone(),
+            None => String::new(),
         }
     }
+
     fn get_pw_salt(&self) -> String {
-        if self.pw_salt.is_some() {
-            self.pw_salt.clone().unwrap()
-        } else {
-            String::new()
+        match self.pw_salt {
+            Some(x) => x.clone(),
+            None => String::new(),
         }
     }
+
     fn get_version(&self) -> String {
-        if self.version.is_some() {
-            self.version.clone().unwrap()
-        } else {
-            DEFAULT_VERSION.to_string()
+        match self.version {
+            Some(x) => x.clone(),
+            None => DEFAULT_VERSION.to_string(),
         }
     }
+
     fn to_password_details(&self) -> PasswordDetails {
         self.clone()
     }
